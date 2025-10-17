@@ -3,12 +3,20 @@ Author   : Trevor Werner
 Course   : COP 2270-U01 (85009) Sec C Prog for Engineers MoWe 12:30 - 1:45
 URL      : http://ocelot.aul.fiu.edu/~userName
 Professor: Michael Robinson
-Program  : Program Number, Purpose/Description
-           A brief description of the program
-Due Date : mm/dd/yyyy
+Program  : 2
+    Purpose of this program is to practice the following concepts:
+    * functions
+    * if, else if, else conditionals
+    * for loops
+    * printf statements
+    * primitive types
+    * single dimension arrays
+    * String class, char x[], with functions
+    * ASCII values
+
+Due Date : 10/14/2025
 
 I certify that this work is my own alone.
-
 
     ..........{ Trevor Werner }..........
 **************************************************/
@@ -18,18 +26,6 @@ I certify that this work is my own alone.
 #include <string.h>
 #include <ctype.h>
 #include <time.h> // used for seeding srand
-
-/**
- * Purpose of this program:
- *   a.) functions
- *   b.) if, else if, else
- *   c.) for loops
- *   d.) printf
- *   e.) primitive types
- *   f.) single dimension arrays
- *   g.) String class, char x[], w/ several functions
- *   h.) ASCII values
- */
 
 // 2c.) Create a single dimensional array containing ONE index,
 //  which will have ONE string w/ your full name as follows:
@@ -70,15 +66,10 @@ double processTangentValue(double x) {
 
 // Main trig function invocation function
 void processTrigFunctionValues(double x) { 
-    // Invoking trig helper functions
-    double cosine = processCosineValue(x);
-    double sine = processSineValue(x);
-    double tangent = processTangentValue(x);
-
-    // Output
-    printf("The cosine of %.2f is %.2f\n", x, cosine);
-    printf("The sin of %.2f is %.2f\n", x, sine);
-    printf("The tangent of %.2f is %.2f\n", x, tangent);
+    // Output each trig value (cosine, sine, tangent)
+    printf("The cosine of %.2f is %.2f\n", x, processCosineValue(x));
+    printf("The sin of %.2f is %.2f\n", x, processSineValue(x));
+    printf("The tangent of %.2f is %.2f\n", x, processTangentValue(x));
 }
 
 // Input exponent value (double) and returns Euler's constant raised to the
@@ -114,7 +105,7 @@ int processIsSpace(char c) {
     return c == ' ';
 }
 
-// Invokes processIsVowel and processIsSymbol
+// Invokes processIsVowel, processIsSpace and processIsSymbol
 int processIsConsonant(char c) {
     return (!processIsVowel(c) && !processIsSymbol(c) && !processIsSpace(c));
 }
@@ -139,31 +130,37 @@ void myName(char name[]) {
 }
 
 void pyramid(char fullName[]) {
-    size_t length = strlen(fullName);
+    // Casting string length to an integer 
+    int length = (int)strlen(fullName);
     int left = 0;
     int right = length - 1;
     int s;
     // Trim left and right chars on each iteration
-    while (right - left > 0) {
+    while (right >= left) {
         for (s = 0; s < left; s++) {
             printf(" ");
         }
-
-        printf("%c", '[');
+        
+        // Surround each line w/ opening and closing brackets
+        printf("%d [", length);
         for (int i = left; i <= right; i++) {
             printf("%c", fullName[i]);
         }
         printf("%c\n", ']');
+        // trim left and right chars after each iteration
         left++;
         right--;
+        length-=2;
     }
     // Final line needs leading spaces
     for (s = 0; s < left; s++) {
         printf(" ");
     }
-    printf("[]\n");
+    // Final empty brackets line
+    printf("0 []\n");
 }
 
+// Prints my name in a variety of cases
 void parsing(char fullName[]) {
     size_t length = strlen(fullName);
     // Print name in uppercase
@@ -240,9 +237,9 @@ int main() {
            processMinimumValues(x, y));
     printf("The maximum value between %.2f and %.2f: %.2f\n", x, y,
            processMaximumValues(x, y));
+    printf("-------- Part 3 ----\n");
     printf("The trig values for %.2f\n", x);
     processTrigFunctionValues(x);
-    // TODO: Trig function output (cos, tan, sin)
     printf("e raised to the %dth power is: %.2f\n", i, processExponentialValues(i));
     printf("The natural log of %d is: %.2f\n", j, processLogValues(j));
     printf("%d raised to the %dth power is: %.2f\n", i, j, processPowerValues(i, j));
@@ -254,6 +251,7 @@ int main() {
 
     printf("-------- Part 5 ----\n");
     pyramid(fullName);
+    printf("-------- Part 6 ----\n");
     parsing(fullName);
     return 0;
 }
