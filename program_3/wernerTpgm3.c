@@ -19,95 +19,144 @@ I certify that this work is my own alone.
     ..........{ Trevor Werner }..........
 **************************************************/
 #include <stdio.h>
+#include <time.h>  // seed for rand generation
 #include <stdlib.h>
-#include <math.h>
-#include <string.h>
-#include <ctype.h>
-#include <time.h> // used for seeding srand
 
-// 2.) 
-//  a) Create a two dimensional array of 10 rows by 10 columns, using x for rows and y for columns
-//    under the name: your lastName First letters of your firstName and 2DimArray 
-//    example: robinsonM2DimArray
-//  b) Load each index with the multiplication of its x and y location
-//  c) Add all the values in columns 3, 5, and 7, and print the total
-//  d) Add all the values in rows 2, 4, and 6, and print the total
-//  e) Subtract the total values (rows-columns), and print the difference.
 
-// 3) Worth 1.25 points
-//      From the main function pass 3 numbers of your choice, to a function 
-// 	 named ascending that will print these numbers in ascending order.
-//
-//      Example if you pass (98, 234, 6)
-//                      print 6 98 234
-//
-//      Do NOT use any built-in sort ANSI C funtion.
-//
-//      You must do the swaping steps as recorderd in video 20
-//
-// 4) Worth 1.50 points
-//      Using a while(1) loop, print the upper case alphabeth and its corresponding ascii values,
-//      from Z to A
-//      Note: You must terminate/stop/break this loop once you process the last letter (A)
-//
-//
-//   5) Worth 2.00 points
-//      Implement division by 0, with error trapping, using if and while() commands,
-//      make sure to use "casting" e.i. float result = (float)int/int;
-//
-//      How:
-//      Create two new variables, and int name firstNumber and an int named secondNumber. 
-//      Using a while loop, read 2 numbers from the user.
-//      Using the if statement, test that the second number in not zero, if it is inform
-//      the user of the error, and ask for a correct second number.
-//      if the second number is NOT a zero, do the division, display all numbers and the
-//      computation using labels, the result MUST have 2 decimal places,
-//
-//      example: "The first number 10 divided by the second number 5 is 2.00"
-//
-//      To exit this while loop the user MUST enter the value 999 for the first 
-// 	 or the second number ***ONLY***
-//
-//
-//   6) Worth 1.00 point
-//      Using a loop of your choice, display all numbers from 0 to 100 where "x mod 5 = 3".  
-//
-//      Loop x is the loop number, that when doing x mod 5, the answer is 3
-//
-//
-//      Remember x starts as 0, and in the last loop, x MUST the 100. 
-//
-//
-//   7) Worth 2.00 points
-//      Having the following TWO, ONE dimensions arrays:
-//
-//      one[0] = "This ANSI C ";   two[0] = "class";
-//      one[1] = "at ";            two[1] = "FIU";
-//      one[2] = "is ";            two[2] = "challenging && enjoyable";
-//
-// 	    print the results using a parallel array, made with these two one dim arrays
-#include <stdbool.h>
+// Constants
+#define MIN 1
+#define MAX 1000
 
-bool isLeapYear(int year) {
-    int divisibleBy4 = year % 4 == 0;
-    int divisibleBy100 = year % 100 == 0;
-    int divisibleBy400 = year % 400 == 0;
+/**
+* 2b) Load each index w/ the multiplication of its x, y
+*/
 
-    if (divisibleBy4 && divisibleBy100 && divisibleBy400) {
-        return true;
-    } else if (divisibleBy4 && divisibleBy100) {
-        return false;
-    } else if (divisibleBy4) {
-        return true;
-    } else {
-        return false;
+void populateArray(int arr[10][10]) {
+    for (int x = 0; x < 10; x++) {
+        for (int y = 0; y < 10; y++) {
+            arr[x][y] = x * y;
+        }
+    }
+}
+
+// 2c) Print the total of columns 3, 5 and 7
+// 2d) Print the total of columns 2, 4 and 6
+void printColumnTotals(int arr[][10]) {
+    int col2 = 0, col3 = 0, col4 = 0, col5 = 0, col6 = 0, col7 = 0;
+
+    for (int row = 0; row < 10; row++) {
+        col2 += arr[row][1];
+        col3 += arr[row][2];
+        col4 += arr[row][3];
+        col5 += arr[row][4];
+        col6 += arr[row][5];
+        col7 += arr[row][6];
+    }
+
+    printf("Columns 3, 5, 7 totals ------\n");
+    printf("Column 3 Total: %d\n", col3);
+    printf("Column 5 Total: %d\n", col5);
+    printf("Column 7 Total: %d\n", col7);
+
+    printf("Columns 2, 4, 6 totals ------\n");
+    printf("Column 2 Total: %d\n", col2);
+    printf("Column 4 Total: %d\n", col4);
+    printf("Column 6 Total: %d\n", col6);
+}
+
+// 2e) Print the difference of the total values (rows - columns)
+void printDifferences(int arr[][10]) {
+    int rowTotals = 0, colTotals = 0;
+
+    // Tally each row  
+    for (int x = 0; x < 10; x++) {
+        int rowTotal = 0;
+        for (int y = 0; y < 10; y++) {
+            rowTotal += arr[x][y];
+        }
+        rowTotals += rowTotal;
+        printf("Row %d total: %d\n", x, rowTotal);
+    }
+
+    // Tally each column
+    for (int y = 0; y < 10; y++) {
+        int colTotal = 0;
+        for (int x = 0; x < 10; x++) {
+            colTotal += arr[x][y];
+        }
+        colTotals += colTotal;
+        printf("Column %d total: %d\n", y, colTotal);
+    }
+
+    printf("Row totals: %d\n", rowTotals);
+    printf("Column totals: %d\n", colTotals);
+    // Print total difference b/n all rows and all columns
+    printf("Rows - Columns = %d\n", rowTotals - colTotals);
+}
+
+// Random number generation between MIN and MAX
+int generateRandomNumber() {
+    return rand() % (MAX - MIN + 1) + MIN;
+}
+
+// Use swaps to sort three numbers into ascending order
+void ascending(int num1, int num2, int num3) {
+    printf("Data Received: %5d %5d %5d\n", num1, num2, num3);
+    int temp;
+
+    while (1) {
+        if (num1 > num2) {
+            temp = num1;
+            num1 = num2;
+            num2 = temp;
+        }
+        if (num2 > num3) {
+            temp = num2;
+            num2 = num3;
+            num3 = temp;
+        } else {
+            break;
+        }
+    }
+
+    printf("Processed Data: %5d %5d %5d\n", num1, num2, num3);
+}
+
+// 4.) Print uppercase alphabet from Z to A using ASCII values
+void printAlphabetReverse() {
+    int upperCaseZCode = 'Z';
+    int upperCaseACode = 'A';
+    while(1) {
+        printf("%c\n", upperCaseZCode);
+        upperCaseZCode--;
+        if (upperCaseZCode < upperCaseACode) {
+            break;
+        }
     }
 }
 
 int main() {
-    int isSpace, isVowel;
-    for (int i = 1900; i <= 2050; i++) {
-        bool is_leap_year = isLeapYear(i);
-        printf("%i is%s a leap year\n", i, is_leap_year ? "" : " not");
+    int wernerT2DimArray[10][10];
+    int el;
+
+    // Seed random number
+    srand(time(NULL));
+
+    int num1 = generateRandomNumber();
+    int num2 = generateRandomNumber();
+    int num3 = generateRandomNumber();
+
+    populateArray(wernerT2DimArray);
+    for (int x = 0; x < 10; x++) {
+        printf("Row: %i ------\n", x);
+        for (int y = 0; y < 10; y++) {
+            printf("%i ", wernerT2DimArray[x][y]);
+        }
+        printf("\n");
     }
+    printColumnTotals(wernerT2DimArray);
+    printDifferences(wernerT2DimArray);
+    ascending(num1, num2, num3);
+    printAlphabetReverse();
+    return 0;
 }

@@ -14,7 +14,7 @@ Program  : 2
     * String class, char x[], with functions
     * ASCII values
 
-Due Date : 10/14/2025
+Due Date : 10/18/2025
 
 I certify that this work is my own alone.
 
