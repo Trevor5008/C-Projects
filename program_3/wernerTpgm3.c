@@ -135,6 +135,34 @@ void printAlphabetReverse() {
     }
 }
 
+// 5.) Implement division by 0, w/ error trapping using if and while()
+// // make sure to use casting -> (float)int/int
+void printDivisionByZero() {
+    int firstNumber, secondNumber;
+    const int exitCode = 999;
+
+    printf("##### Divider Program #######\n");
+    printf("Enter '999' to quit at any time\n");
+    while (1) {
+        // Ask for user input of 1st and 2nd number
+        printf("Enter the first number: ");
+        scanf("%i", &firstNumber);
+        printf("Enter a second number: ");
+        scanf("%i", &secondNumber);
+        if (firstNumber == exitCode || secondNumber == exitCode) {
+            break;
+        }
+        while (secondNumber == 0) {
+            printf("Please re-enter the second number (cannot be zero): ");
+            scanf("%i", &secondNumber);
+        }
+        printf("\n");
+        // Divide both numbers along with the division result
+        float divisionResult = (float) firstNumber / secondNumber;
+        printf("%i divided by %i = %.2f\n", firstNumber, secondNumber, divisionResult);
+    }
+}
+
 int main() {
     int wernerT2DimArray[10][10];
     int el;
@@ -158,5 +186,6 @@ int main() {
     printDifferences(wernerT2DimArray);
     ascending(num1, num2, num3);
     printAlphabetReverse();
+    printDivisionByZero();
     return 0;
 }

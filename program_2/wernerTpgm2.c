@@ -186,7 +186,7 @@ void parsing(char fullName[]) {
     // Print name w/ all vowels in uppercase, and consonants in lower
     printf("My name in alternating case: ");
     int isVowel, isConsonant;
-    char c;
+    char ca
     for (int i = 0; i < length; i++) {
         c = fullName[i];
         isVowel = processIsVowel(c);

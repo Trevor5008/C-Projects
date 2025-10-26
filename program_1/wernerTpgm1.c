@@ -113,7 +113,7 @@ void numericalComputations() {
 // 3.) Determines the sum of values 1 to 100
 void sumOfNumbers() {
     int N = 100;
-    printf("The sum of values from 1 to 100 = %d\n", (1 + N) / (N / 2));
+    printf("The sum of values from 1 to 100 = %d\n", (1 + N) * (N / 2));
     // Loop version
     int sum = 0;
     for (int i = 1; i <= 100; i++) {
