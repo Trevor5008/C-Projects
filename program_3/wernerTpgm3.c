@@ -22,7 +22,6 @@ I certify that this work is my own alone.
 #include <time.h>  // seed for rand generation
 #include <stdlib.h>
 
-
 // Constants
 #define MIN 1
 #define MAX 1000
@@ -127,7 +126,7 @@ void printAlphabetReverse() {
     int upperCaseZCode = 'Z';
     int upperCaseACode = 'A';
     while(1) {
-        printf("%c\n", upperCaseZCode);
+        printf("%c > ASCII value = %i\n", upperCaseZCode, upperCaseZCode);
         upperCaseZCode--;
         if (upperCaseZCode < upperCaseACode) {
             break;
@@ -143,24 +142,60 @@ void printDivisionByZero() {
 
     printf("##### Divider Program #######\n");
     printf("Enter '999' to quit at any time\n");
+
     while (1) {
         // Ask for user input of 1st and 2nd number
         printf("Enter the first number: ");
         scanf("%i", &firstNumber);
+        // Check for exit code
+        if (firstNumber == exitCode) {
+            return;
+        }
         printf("Enter a second number: ");
         scanf("%i", &secondNumber);
-        if (firstNumber == exitCode || secondNumber == exitCode) {
-            break;
+        // Check for exit code
+        if (secondNumber == exitCode) {
+            return;
         }
+        // Loop until user enters non-zero value
         while (secondNumber == 0) {
             printf("Please re-enter the second number (cannot be zero): ");
             scanf("%i", &secondNumber);
+            if (secondNumber == exitCode) {
+                return;
+            }
         }
-        printf("\n");
         // Divide both numbers along with the division result
         float divisionResult = (float) firstNumber / secondNumber;
         printf("%i divided by %i = %.2f\n", firstNumber, secondNumber, divisionResult);
     }
+}
+
+// 6.) Uses a while loop to display numbers from 0 to 100
+// .. where "x mod 5 = 3"
+void printMod5Equal3() {
+    int start = 0, modulo = 5, res = 0;
+    printf("---- n mod 5 operations -------\n");
+    while (start <= 100) {
+        res = start % modulo;
+        if (res == 3) {
+            printf("%i mod %i = %i\n", start, modulo, res);
+        }
+        start++;
+    }
+    printf("-----------------\n");
+}
+
+// 7.) Print results of two single-dimensional arrays
+void printTwo1DArrays() {
+    char one[3][50] = {"This ANSI C ", "at ", "is "};
+    char two[3][50] = {"class ", "FIU ", "challenging && enjoyable"};
+
+    int i;
+    for (i = 0; i < 3; ++i) {
+        printf("%s%s", one[i], two[i]);
+    }
+    printf("\n");
 }
 
 int main() {
@@ -174,6 +209,7 @@ int main() {
     int num2 = generateRandomNumber();
     int num3 = generateRandomNumber();
 
+    // Part 2 / 2D Array operations
     populateArray(wernerT2DimArray);
     for (int x = 0; x < 10; x++) {
         printf("Row: %i ------\n", x);
@@ -184,8 +220,15 @@ int main() {
     }
     printColumnTotals(wernerT2DimArray);
     printDifferences(wernerT2DimArray);
+    // Part 3 / sort 3 values
     ascending(num1, num2, num3);
+    // Part 4 / print upper case alphabet in reverse
     printAlphabetReverse();
+    // Part 5 / divide by zero error handling
     printDivisionByZero();
+    // Part 6 / looping mod 5 = 3
+    printMod5Equal3();
+    // Part 7 / print parallel array contents
+    printTwo1DArrays();
     return 0;
 }
