@@ -13,6 +13,7 @@ I certify that this work is my own alone.
     ..........{ Trevor Werner }..........
 **************************************************/
 #include <stdio.h>
+#include <stdlib.h>
 
 // Displays each result for operands 1-10
 void numericalComputations() {
@@ -139,9 +140,11 @@ int main() {
     float credits_current = 10.00;
     char class_name[] = "Secure C";
 
-    numericalComputations();
-    sumOfNumbers();
-    myInfo(name, major, credits_taken, credits_current, class_name);
-
+    srand(RAND_MAX);
+    float random = rand();
+    printf("%.2f", random);
+    // numericalComputations();
+    // sumOfNumbers();
+    // myInfo(name, major, credits_taken, credits_current, class_name);
     return 0;
 }

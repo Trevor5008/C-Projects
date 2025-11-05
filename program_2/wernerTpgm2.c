@@ -186,7 +186,7 @@ void parsing(char fullName[]) {
     // Print name w/ all vowels in uppercase, and consonants in lower
     printf("My name in alternating case: ");
     int isVowel, isConsonant;
-    char ca
+    char c;
     for (int i = 0; i < length; i++) {
         c = fullName[i];
         isVowel = processIsVowel(c);
@@ -216,42 +216,49 @@ void parsing(char fullName[]) {
 }
 
 int main() {
-    int i = 7;
-    int j = 9;
-    double x = 72.5;
-    double y = -0.34;
+    // int i = 7;
+    // int j = 9;
+    // double x = 72.5;
+    // double y = -0.34;
 
+    char name[] = "Trevor";
+    int i;
+    printf("The length of my name = %d\n", sizeof(name));
+    for (i = 0; i < sizeof(name); i++) {
+        printf("%c", name[i]);
+    }
+    printf("\n");
     // Seeds rand() w/ current time
-    srand(time(NULL));
-
-    char fullName[] = "Trevor $ Carlton % Werner ";
-
-    printf("My name is %s\n", fullName);
-
-    printf("-------- Part 2 ----\n");
-    printf("The absolute value of %.2f: %.2f\n", y, processAbsoluteValues(y));
-    printf("The rounded value of %.2f: %.2f\n", x, processRoundValues(x));
-    printf("The ceiling of value of %.2f: %.2f\n", x, processCeilingValues(x));
-    printf("The floor of value of %.2f: %.2f\n", x, processFlooringValues(x));
-    printf("The minimum value between %.2f and %.2f: %.2f\n", x, y,
-           processMinimumValues(x, y));
-    printf("The maximum value between %.2f and %.2f: %.2f\n", x, y,
-           processMaximumValues(x, y));
-    printf("-------- Part 3 ----\n");
-    printf("The trig values for %.2f\n", x);
-    processTrigFunctionValues(x);
-    printf("e raised to the %dth power is: %.2f\n", i, processExponentialValues(i));
-    printf("The natural log of %d is: %.2f\n", j, processLogValues(j));
-    printf("%d raised to the %dth power is: %.2f\n", i, j, processPowerValues(i, j));
-    printf("The square root of %d is: %.2f\n", i, processSquareRootValues(i));
-    printf("A random value between %i and %i is: %i\n", 1, 10, processRandomValues(1, 10));
-
-    printf("-------- Part 4 ----\n");
-    myName(fullName);
-
-    printf("-------- Part 5 ----\n");
-    pyramid(fullName);
-    printf("-------- Part 6 ----\n");
-    parsing(fullName);
+    // srand(time(NULL));
+    //
+    // char fullName[] = "Trevor $ Carlton % Werner ";
+    //
+    // printf("My name is %s\n", fullName);
+    //
+    // printf("-------- Part 2 ----\n");
+    // printf("The absolute value of %.2f: %.2f\n", y, processAbsoluteValues(y));
+    // printf("The rounded value of %.2f: %.2f\n", x, processRoundValues(x));
+    // printf("The ceiling of value of %.2f: %.2f\n", x, processCeilingValues(x));
+    // printf("The floor of value of %.2f: %.2f\n", x, processFlooringValues(x));
+    // printf("The minimum value between %.2f and %.2f: %.2f\n", x, y,
+    //        processMinimumValues(x, y));
+    // printf("The maximum value between %.2f and %.2f: %.2f\n", x, y,
+    //        processMaximumValues(x, y));
+    // printf("-------- Part 3 ----\n");
+    // printf("The trig values for %.2f\n", x);
+    // processTrigFunctionValues(x);
+    // printf("e raised to the %dth power is: %.2f\n", i, processExponentialValues(i));
+    // printf("The natural log of %d is: %.2f\n", j, processLogValues(j));
+    // printf("%d raised to the %dth power is: %.2f\n", i, j, processPowerValues(i, j));
+    // printf("The square root of %d is: %.2f\n", i, processSquareRootValues(i));
+    // printf("A random value between %i and %i is: %i\n", 1, 10, processRandomValues(1, 10));
+    //
+    // printf("-------- Part 4 ----\n");
+    // myName(fullName);
+    //
+    // printf("-------- Part 5 ----\n");
+    // pyramid(fullName);
+    // printf("-------- Part 6 ----\n");
+    // parsing(fullName);
     return 0;
 }
