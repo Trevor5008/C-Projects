@@ -1,0 +1,4 @@
+Trevor Werner
+Florida International University
+This is a text file to be read line by line
+Making a backup copy of this input file
